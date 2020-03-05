@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SNS.Areas.Identity.Data;
+using SNS.Models;
 
 namespace SNS.Data
 {
@@ -15,6 +16,7 @@ namespace SNS.Data
             : base(options)
         {
         }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,6 +24,7 @@ namespace SNS.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            builder.Entity<Notification>().ToTable("Notifications");
         }
     }
 }

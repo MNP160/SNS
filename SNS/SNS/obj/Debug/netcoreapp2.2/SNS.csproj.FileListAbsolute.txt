@@ -36,3 +36,10 @@ D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Areas\Identity
 D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Create.cshtml.g.cs
+D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Delete.cshtml.g.cs
+D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Details.cshtml.g.cs
+D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Edit.cshtml.g.cs
+D:\Programming\Projects\SNS\SNS\SNS\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Index.cshtml.g.cs
