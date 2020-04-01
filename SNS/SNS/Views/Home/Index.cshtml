@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Notification>
+@{
+
     ViewData["Title"] = "Home Page";
 }
 
@@ -49,6 +51,40 @@
         </div>
     </section>
 </div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Severity)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Severity)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
 
 
 <script>

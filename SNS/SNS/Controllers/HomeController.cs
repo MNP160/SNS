@@ -4,15 +4,25 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SNS.Data;
 using SNS.Models;
 
 namespace SNS.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SNSContext _context;
+
+        public HomeController(SNSContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+
+
+            return View(_context.Notifications.OrderByDescending(x=>x.NotificationId).Take(5).ToList());
         }
 
         public IActionResult Privacy()

@@ -1,159 +1,45 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using SNS.Data;
+using SNS.Migrations;
+using SNS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using SNS.Data;
-using SNS.Models;
 
 namespace SNS.Controllers
 {
-    public class NotificationsController : Controller
+    public class NotificationsController :Controller
     {
         private readonly SNSContext _context;
 
-        public NotificationsController(SNSContext context)
+        public NotificationsController(SNSContext con)
         {
-            _context = context;
+            _context = con;
         }
 
-        // GET: Notifications
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Notifications.ToListAsync());
-        }
-
-        // GET: Notifications/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var notification = await _context.Notifications
-                .FirstOrDefaultAsync(m => m.NotificationId == id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            return View(notification);
-        }
-
-        // GET: Notifications/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Notifications/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NotificationId,Subject,Description,Severity,Department")] Notification notification)
+        public IActionResult Create(Notification notification)
         {
-            if (ModelState.IsValid)
-            {
-                var username = HttpContext.User.Identity.Name;
-                System.Diagnostics.Debug.WriteLine("------------------------------------------------");
-                System.Diagnostics.Debug.WriteLine(username);
-                System.Diagnostics.Debug.WriteLine("------------------------------------------------");
-                var user = _context.Users.FirstOrDefault(x=>x.Email==username);
-                notification.Department = user.Department;
-                _context.Add(notification);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(notification);
+            var username = HttpContext.User.Identity.Name;
+            System.Diagnostics.Debug.WriteLine("------------------------------------------------");
+            System.Diagnostics.Debug.WriteLine(username);
+            System.Diagnostics.Debug.WriteLine("------------------------------------------------");
+            var user = _context.Users.FirstOrDefault(x => x.Email == username);
+            notification.Department = user.Department;
+            _context.Notifications.Add(notification);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+
         }
 
-        // GET: Notifications/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var notification = await _context.Notifications.FindAsync(id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-            return View(notification);
-        }
-
-        // POST: Notifications/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NotificationId,Subject,Description,Severity,Department")] Notification notification)
-        {
-            if (id != notification.NotificationId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(notification);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NotificationExists(notification.NotificationId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(notification);
-        }
-
-        // GET: Notifications/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var notification = await _context.Notifications
-                .FirstOrDefaultAsync(m => m.NotificationId == id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
-
-            return View(notification);
-        }
-
-        // POST: Notifications/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var notification = await _context.Notifications.FindAsync(id);
-            _context.Notifications.Remove(notification);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool NotificationExists(int id)
-        {
-            return _context.Notifications.Any(e => e.NotificationId == id);
-        }
     }
 }
